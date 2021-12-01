@@ -20,7 +20,7 @@ class CourseModulController extends Controller
     {
         if (request()->ajax())
         {
-            $query = CourseModul::query();
+            $query = CourseModul::where('courses_id', $course->id);
 
             return DataTables::of($query)
                 ->addColumn('action', function($item) {
@@ -103,6 +103,7 @@ class CourseModulController extends Controller
      */
     public function edit(CourseModul $modul)
     {
+
         return view('pages.dashboard.modul.edit', compact('modul'));
     }
 
@@ -113,9 +114,21 @@ class CourseModulController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseModulRequest $request, CourseModul $modul)
     {
-        //
+        $data = $request->all();
+
+        if($request->file('file')) {
+            if($request->oldVideo) {
+                Storage::delete($request->oldVideo);
+            }
+            $data['file'] = $request->file('file')->store('public/videos'); 
+            
+        }
+        $modul->update($data);
+
+
+        return redirect()->route('dashboard.course.modul.index');
     }
 
     /**
@@ -126,7 +139,11 @@ class CourseModulController extends Controller
      */
     public function destroy(CourseModul $modul)
     {
-        $modul->delete();
+        if($modul->url) {
+            Storage::delete($modul->url);
+        }
+
+        CourseModul::destroy($modul->id);
 
         return redirect()->route('dashboard.course.modul.index', $modul->courses_id);
     }

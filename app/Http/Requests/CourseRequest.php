@@ -27,7 +27,7 @@ class CourseRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'mentors_id' => 'required|integer',
-            'file' => 'required|image',
+            'file' => 'image|file',
             'price' => 'required|integer',
             'description' => 'required'
         ];

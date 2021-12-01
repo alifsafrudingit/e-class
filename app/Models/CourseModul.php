@@ -17,6 +17,6 @@ class CourseModul extends Model
 
     public function course()
     {
-        return $this->belongstTo(Course::class, 'courses_id', 'id');
+        return $this->belongsTo(Course::class, 'courses_id', 'id');
     }
 }

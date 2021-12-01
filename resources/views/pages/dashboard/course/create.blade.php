@@ -29,7 +29,8 @@
             <div class="flex flex-wrap -mx-3 mb-6">
               <div class="w-full px-3">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Image</label>
-                <input type="file" name="file" accept="image/*" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <img class="img-preview mb-3">
+                <input type="file" name="file" accept="image/*" id="image" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onchange="previewImage()">
               </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -74,5 +75,20 @@
     <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
     <script>
       CKEDITOR.replace('description');
+    </script>
+    <script>
+      function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+          imgPreview.src = oFREvent.target.result;
+        }
+      }
     </script>
 </x-app-layout>

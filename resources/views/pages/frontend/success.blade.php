@@ -13,9 +13,9 @@
           We've sent the receipt to your email<br class="sm:block hidden"> address is example@gmail.com
         </p>
         <div class="flex justify-center">
-          <button class="btn-view inline-flex font-semibold text-white text-lg leading-7 py-4 px-8 rounded-xl focus:outline-none">
+          <a href="{{ route('dashboard.my-transaction.index') }}" class="btn-view inline-flex font-semibold text-white text-lg leading-7 py-4 px-8 rounded-xl focus:outline-none">
             View My Order
-          </button>
+          </a>
         </div>
       </div>
     </div>

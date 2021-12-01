@@ -124,6 +124,14 @@ class CourseController extends Controller
     public function update(CourseRequest $request, Course $course)
     {
         $data = $request->all();
+
+        if($request->file('file')) {
+            if($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $data['file'] = $request->file('file')->store('public/images'); 
+        }
+        
         $data['slug'] = Str::slug($request->name);
 
         $course->update($data);
@@ -139,7 +147,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        $course->delete();
+        if($course->img) {
+            Storage::delete($course->img);
+        }
+
+        Course::destroy($course->id);
 
         return redirect()->route('dashboard.course.index');
     }

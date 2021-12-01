@@ -15,9 +15,9 @@
                 mentor berpengalaman
               </p>
             </div>
-            <div class="flex overflow-x-auto mb-4 -mx-3">
+            <div class="flex flex-wrap overflow-x-auto mb-4 -mx-3">
               @foreach ($courses as $course)    
-              <div class="px-3 flex-none" style="width: 313px">
+              <div class="px-3 mb-6" style="width: 313px">
                 <div class="rounded-xl p-4 pb-8 relative bg-white">
                   <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
                     <img
@@ -34,8 +34,9 @@
                 </div>
               </div>
               @endforeach
+
             </div>
           </div>
         </section>
-        <!-- END: KATALOG KELAS -->   
+        <!-- END: KATALOG KELAS -->    
 @endsection
